@@ -2826,7 +2826,7 @@ class UserEnabledRenderer(TableCellRenderer):
         self.focusX = -1
         self.focusY = -1
         self.colorsUser = [Color(204, 229, 255), Color(204, 255, 204), Color(204, 204, 255), Color(190,220,210)]
-        self.colorsAlert = [Color.white, Color(255, 153, 153), Color(255, 218, 185), Color(255, 255, 204), Color(211, 211, 211)]
+        self.colorsAlert = [Color.white, Color(255, 153, 153), Color(255, 218, 185), Color(255, 255, 204), Color(233, 233, 233), Color(255, 204, 204)]
 
     def getTableCellRendererComponent(self, table, value, isSelected, hasFocus, row, column):
         cell = self._defaultCellRender.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column)
@@ -2869,16 +2869,15 @@ class UserEnabledRenderer(TableCellRenderer):
                                 if table.getValueAt(row, y) == table.getValueAt(row, column):
                                     if table.getValueAt(row, y).startswith("HTTP 2"):
                                         cell.setBackground(self.colorsAlert[1])
-                                        toolTipMessage = "The URL is not in the user's list, but the response is same as URL owner"
+                                        toolTipMessage = "The URL is not in the user's list, but the response (HTTP 2XX) is same as URL owner!"
                                     elif table.getValueAt(row, y).startswith("HTTP 3"):
                                         if not cell.getBackground() == self.colorsAlert[1] and not cell.getBackground() == self.colorsAlert[2]:
                                             cell.setBackground(self.colorsAlert[3])
-                                            toolTipMessage = "The URL is not in the user's list, but the response is same as URL owner!"
+                                            toolTipMessage = "The URL is not in the user's list, but the response (HTTP 3XX) is same as URL owner!"
                                 elif table.getValueAt(row, y)[:8] == table.getValueAt(row, column)[:8]:
                                     if not cell.getBackground() == self.colorsAlert[1]:    
                                         cell.setBackground(self.colorsAlert[2])
                                         toolTipMessage = "The URL is not in the user's list, but returns same HTTP response code with URL owner!"
-
                 cell.setToolTipText(toolTipMessage)
 
                 if hasFocus:
